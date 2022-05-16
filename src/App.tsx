@@ -11,12 +11,13 @@ import * as deviceHelpers from "./helpers/device";
 import type { DeviceStatus } from "./types";
 
 export function App() {
-  const { isLoading, data: devices } = useDeviceData();
-  const handleDragDrop = React.useCallback((type: DeviceStatus) => {
-    return () => {
-      console.log(`dropped on ${type}`);
-    };
-  }, []);
+  const { isLoading, data: devices, mutate } = useDeviceData();
+  const handleDragDrop = React.useCallback(
+    (status: DeviceStatus) => {
+      return () => {};
+    },
+    [mutate]
+  );
 
   return (
     <div>

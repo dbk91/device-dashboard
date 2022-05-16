@@ -23,14 +23,16 @@ export function Column(props: ColumnProps) {
       setDragEnter(false);
     }
 
-    rootRef.current.addEventListener("dragenter", handleDragEnter);
-    rootRef.current.addEventListener("dragover", handleDragOver);
-    rootRef.current.addEventListener("dragleave", handleDragLeave);
+    const ref = rootRef.current;
+
+    ref.addEventListener("dragenter", handleDragEnter);
+    ref.addEventListener("dragover", handleDragOver);
+    ref.addEventListener("dragleave", handleDragLeave);
 
     return () => {
-      rootRef.current.removeEventListener("dragenter", handleDragEnter);
-      rootRef.current.removeEventListener("dragover", handleDragOver);
-      rootRef.current.removeEventListener("dragleave", handleDragLeave);
+      ref.removeEventListener("dragenter", handleDragEnter);
+      ref.removeEventListener("dragover", handleDragOver);
+      ref.removeEventListener("dragleave", handleDragLeave);
     };
   }, []);
 
