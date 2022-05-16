@@ -1,4 +1,5 @@
 import useSWR from "swr";
+import { nanoid } from "nanoid";
 
 import sampleData from "../data/devices.json";
 
@@ -7,7 +8,10 @@ import type { Device } from "../types";
 async function getDevices(): Promise<Device[]> {
   // Simulate a network request
   await new Promise((resolve) => setTimeout(resolve, 1e3));
-  return sampleData.devices as Device[];
+  return sampleData.devices.map((device) => ({
+    ...device,
+    id: nanoid(),
+  })) as Device[];
 }
 
 export function useDeviceData() {

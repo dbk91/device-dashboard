@@ -9,6 +9,7 @@ specifiers:
   '@types/react': ^18.0.9
   '@types/react-dom': ^18.0.4
   autoprefixer: ^10.4.7
+  nanoid: ^3.3.4
   parcel: ^2.5.0
   postcss: ^8.4.13
   react: ^18.1.0
@@ -20,6 +21,7 @@ dependencies:
   '@fortawesome/fontawesome-svg-core': 6.1.1
   '@fortawesome/free-regular-svg-icons': 6.1.1
   '@fortawesome/react-fontawesome': 0.1.18_hjfkmtq3pe7bdfmd7inrupgslm
+  nanoid: 3.3.4
   react: 18.1.0
   react-dom: 18.1.0_react@18.1.0
   swr: 1.3.0_react@18.1.0
@@ -1626,7 +1628,6 @@ packages:
     resolution: {integrity: sha512-MqBkQh/OHTS2egovRtLk45wEyNXwF+cokD+1YPf9u5VfJiRdAiRwB2froX5Co9Rh20xs4siNPm8naNotSD6RBw==}
     engines: {node: ^10 || ^12 || ^13.7 || ^14 || >=15.0.1}
     hasBin: true
-    dev: true
 
   /node-addon-api/3.2.1:
     resolution: {integrity: sha512-mmcei9JghVNDYydghQmeDX8KoAm0FAiYyIcUt/N4nhyAipB17pllZQDOJD2fotxABnt4Mdz+dKTO7eftLg4d0A==}

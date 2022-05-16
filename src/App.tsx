@@ -1,3 +1,4 @@
+import * as React from "react";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { AppBar } from "./components/AppBar";
@@ -7,8 +8,15 @@ import { useDeviceData } from "./hooks/useDeviceData";
 
 import * as deviceHelpers from "./helpers/device";
 
+import type { DeviceStatus } from "./types";
+
 export function App() {
   const { isLoading, data: devices } = useDeviceData();
+  const handleDragDrop = React.useCallback((type: DeviceStatus) => {
+    return () => {
+      console.log(`dropped on ${type}`);
+    };
+  }, []);
 
   return (
     <div>
@@ -18,25 +26,25 @@ export function App() {
           <p>Loading...</p>
         ) : (
           <div className="columns-4 h-full">
-            <Column title="Requested">
+            <Column title="Requested" onDragDrop={handleDragDrop("requested")}>
               {devices.filter(deviceHelpers.isRequested).map((device) => (
-                <Card primaryText={device.name} />
+                <Card key={device.id} primaryText={device.name} />
               ))}
             </Column>
-            <Column title="Purchased">
-              {devices
-                .filter(deviceHelpers.isPurchased)
-                .map(deviceHelpers.getDeviceName)}
+            <Column title="Purchased" onDragDrop={handleDragDrop("purchased")}>
+              {devices.filter(deviceHelpers.isPurchased).map((device) => (
+                <Card key={device.id} primaryText={device.name} />
+              ))}
             </Column>
-            <Column title="Shipped">
-              {devices
-                .filter(deviceHelpers.isShipped)
-                .map(deviceHelpers.getDeviceName)}
+            <Column title="Shipped" onDragDrop={handleDragDrop("shipped")}>
+              {devices.filter(deviceHelpers.isShipped).map((device) => (
+                <Card key={device.id} primaryText={device.name} />
+              ))}
             </Column>
-            <Column title="Installed">
-              {devices
-                .filter(deviceHelpers.isInstalled)
-                .map(deviceHelpers.getDeviceName)}
+            <Column title="Installed" onDragDrop={handleDragDrop("installed")}>
+              {devices.filter(deviceHelpers.isInstalled).map((device) => (
+                <Card key={device.id} primaryText={device.name} />
+              ))}
             </Column>
           </div>
         )}
