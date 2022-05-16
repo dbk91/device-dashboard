@@ -36,10 +36,15 @@ export function Column(props: ColumnProps) {
 
   const { onDragDrop } = props;
   React.useEffect(() => {
-    rootRef.current.addEventListener("drop", onDragDrop);
+    function handleDrop() {
+      onDragDrop();
+      setDragEnter(false);
+    }
+
+    rootRef.current.addEventListener("drop", handleDrop);
 
     return () => {
-      rootRef.current.removeEventListener("drop", onDragDrop);
+      rootRef.current.removeEventListener("drop", handleDrop);
     };
   }, [onDragDrop]);
 
