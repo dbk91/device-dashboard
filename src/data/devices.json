@@ -1,0 +1,17 @@
+{
+  "devices": [
+    { "name": "light switch 1", "type": "SWITCH", "state": "off" },
+    { "name": "light switch 2", "type": "SWITCH", "state": "off" },
+    { "name": "light switch 3", "type": "SWITCH", "state": "off" },
+    { "name": "light switch 4", "type": "SWITCH", "state": "off" },
+    {
+      "name": "door lock",
+      "type": "LOCK",
+      "codes": ["1234", "2345", "3456", "4567"],
+      "locked": true
+    },
+    { "name": "hallway dimmer", "type": "DIMMER", "level": 0.85 },
+    { "name": "hallway dimmer", "type": "DIMMER", "level": 0.85 },
+    { "name": "thermostat", "type": "THERMO", "temp": 72.0, "mode": "AUTO" }
+  ]
+}
