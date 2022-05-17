@@ -1,3 +1,4 @@
+import * as React from "react";
 import useSWR from "swr";
 import { nanoid } from "nanoid";
 
@@ -15,10 +16,16 @@ async function getDevices(): Promise<Device[]> {
 }
 
 export function useDeviceData() {
+  const isPaused = React.useRef<() => boolean>(() => false);
   const { data, error, mutate } = useSWR<Device[]>("devices", getDevices, {
-    revalidateOnFocus: false,
-    revalidateOnReconnect: false,
+    // For simulated persisted data
+    isPaused: () => isPaused.current(),
   });
+
+  React.useEffect(() => {
+    isPaused.current = () => typeof data !== "undefined";
+  }, [data]);
+
   const isLoading = typeof data === "undefined" && typeof error === "undefined";
 
   return {

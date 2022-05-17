@@ -7,6 +7,7 @@ import type { DragSourceMonitor } from "react-dnd";
 
 interface CardProps {
   primaryText: string;
+  primaryAction?: React.ReactNode | React.ReactNode[];
   dragData?: unknown;
   onDragEnd?: (item: any, monitor: DragSourceMonitor) => void;
   icon?: JSX.Element;
@@ -30,7 +31,7 @@ export function Card(props: CardProps) {
   return (
     <div
       ref={dragRef}
-      className={`h-12 w-full border rounded-lg p-2 shadow-sm ${
+      className={`h-16 w-full border rounded-lg p-2 shadow-sm ${
         isDragging ? "hover:cursor-grabbing" : "hover:cursor-grab"
       }`}
       draggable
@@ -39,6 +40,7 @@ export function Card(props: CardProps) {
         <span>{cardIcon}</span>
         <span>{props.primaryText}</span>
       </div>
+      <div className="flex justify-end">{props.primaryAction}</div>
     </div>
   );
 }
