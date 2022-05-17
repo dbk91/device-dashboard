@@ -2,6 +2,7 @@ import * as React from "react";
 import { DndProvider } from "react-dnd";
 import { HTML5Backend } from "react-dnd-html5-backend";
 import { Link } from "react-router-dom";
+import { nanoid } from "nanoid";
 
 import { useDeviceData } from "../../hooks/useDeviceData";
 import * as deviceHelpers from "../..//helpers/device";
@@ -15,7 +16,7 @@ export function Dashboard() {
   const { isLoading, data: devices, mutate } = useDeviceData();
 
   const handleDrop = React.useCallback<
-    (item: any, monitor: DragSourceMonitor) => void
+    (item: { id: string }, monitor: DragSourceMonitor) => void
   >(
     (item, monitor) => {
       const dropResult = monitor.getDropResult<{ columnName: DeviceStatus }>();
@@ -23,8 +24,20 @@ export function Dashboard() {
         mutate(
           (devices) =>
             devices.map((device) => {
-              if (device.id === item.id) {
-                return { ...device, status: dropResult.columnName };
+              if (device.id.toString() === item.id.toString()) {
+                return {
+                  ...device,
+                  status: dropResult.columnName,
+                  changeEvents: [
+                    ...device.changeEvents,
+                    {
+                      id: nanoid(),
+                      datetime: new Date(),
+                      to: dropResult.columnName,
+                      from: device.status,
+                    },
+                  ],
+                };
               }
 
               return device;
@@ -60,7 +73,7 @@ export function Dashboard() {
   return (
     <>
       {isLoading ? (
-        <p>Loading...</p>
+        <h5 className="text-center">Loading...</h5>
       ) : (
         <DndProvider backend={HTML5Backend}>
           <div className="columns-4 h-full">

@@ -1,6 +1,5 @@
 import * as React from "react";
 import useSWR from "swr";
-import { nanoid } from "nanoid";
 
 import sampleData from "../data/devices.json";
 
@@ -11,7 +10,7 @@ async function getDevices(): Promise<Device[]> {
   await new Promise((resolve) => setTimeout(resolve, 1e3));
   return sampleData.devices.map((device) => ({
     ...device,
-    id: nanoid(),
+    changeEvents: [],
   })) as Device[];
 }
 

@@ -6,7 +6,7 @@ export function AppLayout() {
   return (
     <>
       <AppBar />
-      <main className="h-screen container mx-auto pt-12">
+      <main className="h-screen container mx-auto pt-16">
         <Outlet />
       </main>
     </>
