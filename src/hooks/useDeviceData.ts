@@ -15,7 +15,10 @@ async function getDevices(): Promise<Device[]> {
 }
 
 export function useDeviceData() {
-  const { data, error, mutate } = useSWR<Device[]>("devices", getDevices);
+  const { data, error, mutate } = useSWR<Device[]>("devices", getDevices, {
+    revalidateOnFocus: false,
+    revalidateOnReconnect: false,
+  });
   const isLoading = typeof data === "undefined" && typeof error === "undefined";
 
   return {
